@@ -1,0 +1,20 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server2",
+      "author": "typicode2"
+    }
+  ],
+  "login": {
+    "role": "administrator",
+    "statusCode": 200,
+    "username": "qwae",
+    "password": "qwe"
+  },
+  "user": {
+    "username": "admin",
+    "password": "123456",
+    "role": "administrator"
+  }
+}

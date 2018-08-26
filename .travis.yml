@@ -1,0 +1,31 @@
+language: node_js
+
+sudo: false
+
+node_js:
+  - "8"
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
+
+script:
+  - npm run build
+  - npm test
+  
+after_success:
+  - bash ./scripts/deploy.sh
+
+env:
+  global:
+    - GH_USER: hsian
+    - EMAIL: 407775611@qq.com
+    - GH_REF: panda-cli
+    - DIST: build
