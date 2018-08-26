@@ -1,0 +1,16 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "panda-scaffold": "0.0.1",
+    "react": "16.4.2",
+    "react-dom": "16.4.2"
+  },
+  "scripts": {
+    "start": "panda dev",
+    "build": "panda build",
+    "test": "panda test --env=jsdom",
+    "mock": "panda mock --watch db/db.json"
+  }
+}

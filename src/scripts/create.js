@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const os = require('os');
 const spawn = require('cross-spawn');
+const scaffoldName = "panda-scaffold";
 
 const program = new commander.Command()
 	.arguments('<app-name>')
@@ -45,6 +46,7 @@ function createApp(name, useNpm){
 
 		// init new app
 		const appPackage = require(path.join(root, 'package.json'));
+		const ownPath = path.join(root, 'node_modules', scaffoldName);
 
 		// Copy over some of the devDependencies
   		appPackage.dependencies = appPackage.dependencies || {};
@@ -70,7 +72,7 @@ function createApp(name, useNpm){
 			);
 		}
 
-		const templatePath = path.join("../../src", 'template');
+		const templatePath = path.join(ownPath, "src", 'template');
 		if(fs.existsSync(templatePath)){
 			fs.copySync(templatePath, root);
 		}else{
@@ -83,7 +85,8 @@ function createApp(name, useNpm){
 }
 
 function install(root, appName, useYarn){
-	const depandencies = ['react', 'react-dom', /*"panda-cli"*/];
+	const depandencies = ['react', 'react-dom', scaffoldName];
+
 	console.log('Installing packages. This might take a couple of minutes.');
 
 	return new Promise((resolve, reject) => {
