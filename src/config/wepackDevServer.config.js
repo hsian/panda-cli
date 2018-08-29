@@ -3,7 +3,7 @@
 const paths = require('./paths');
 const webpackDevConfig = require('./webpack.config.dev');
 const userConfig = require("./user.config");
-const { port, proxy } = userConfig;
+const { port, proxy, name, apps } = userConfig;
 
 const urlConfig = {
   host: process.env.HOST || '0.0.0.0',
@@ -11,19 +11,11 @@ const urlConfig = {
   protocol: process.env.HTTPS === 'true' ? 'https' : 'http'
 }
 
-
-// const createRewrites = () => {
-//   return userConfig.apps.map(app => {
-//     const _from = `${webpackDevConfig.output.publicPath}/${app}/`
-//     return { from: new RegExp(_from), to: `/${app}/index.html` }
-//   })
-// }
-
 const createDevServerConfig = function(allowedHost) {
   return {
 
-    disableHostCheck:
-      !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
+    // disableHostCheck:
+    //   !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
 
     compress: true,
 
@@ -35,7 +27,7 @@ const createDevServerConfig = function(allowedHost) {
 
     hot: true,
 
-    publicPath:webpackDevConfig.output.publicPath,
+    publicPath: webpackDevConfig.output.publicPath,
 
     quiet: true,
 
@@ -47,12 +39,27 @@ const createDevServerConfig = function(allowedHost) {
     host: urlConfig.host,
     overlay: false,
     historyApiFallback: {
-      rewrites: [
-        {from: /\/react-redux-example\/portal/, to: '/portal/index.html' },
-      ]
+      //index: `/${name}/portal/index.html`,
+      // rewrites: apps.map(app => {
+      //   const path = `${name}/${app}`;
+      //   return { 
+      //     from: new RegExp(`((${path}(?=/)|(${path}$)))`),
+      //     to: `${name}/${app}/index.html` 
+      //   }
+      // }),
+      rewrites: {
+        from: new RegExp(`react-redux-example/portal`),
+        to: `/react-redux-example/portal/index.html` 
+      }
     },
     //public: allowedHost,
-    proxy
+    proxy: [
+      {
+        context: [
+          `!${name}/portal/**`
+        ]
+      }
+    ]
   };
 };
 
