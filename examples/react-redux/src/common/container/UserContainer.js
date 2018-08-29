@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Authority from "./utils/authority";
 import permission from "./utils/promission";
@@ -38,13 +38,13 @@ export default class AppContainer extends React.Component{
 	}
 
 	render(){
-		const {children, history} = this.props;
+		const {children, history, basename} = this.props;
 
 		return(
 			<ConnectedRouter history={history}>
-				<HashRouter>
+				<BrowserRouter basename={basename}>
 					{children}
-				</HashRouter>
+				</BrowserRouter>
 			</ConnectedRouter>
 		)
 	}

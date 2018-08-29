@@ -11,6 +11,14 @@ const urlConfig = {
   protocol: process.env.HTTPS === 'true' ? 'https' : 'http'
 }
 
+
+// const createRewrites = () => {
+//   return userConfig.apps.map(app => {
+//     const _from = `${webpackDevConfig.output.publicPath}/${app}/`
+//     return { from: new RegExp(_from), to: `/${app}/index.html` }
+//   })
+// }
+
 const createDevServerConfig = function(allowedHost) {
   return {
 
@@ -39,10 +47,12 @@ const createDevServerConfig = function(allowedHost) {
     host: urlConfig.host,
     overlay: false,
     historyApiFallback: {
-      disableDotRule: true,
+      rewrites: [
+        {from: /\/react-redux-example\/portal/, to: '/portal/index.html' },
+      ]
     },
     //public: allowedHost,
-    proxy,
+    proxy
   };
 };
 

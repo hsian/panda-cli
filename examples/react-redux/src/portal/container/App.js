@@ -10,7 +10,7 @@ export default class App extends React.Component{
 	render(){
 		const {history} = this.props;
 		return(
-			<UserContainer history={history}>
+			<UserContainer history={history} basename="react-redux-example/portal">
 				<Switch>
 				  <Route exact path='/' component={Login}/>
 				  <Route exact path='/login' component={Login}/>

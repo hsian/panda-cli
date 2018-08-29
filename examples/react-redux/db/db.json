@@ -9,8 +9,8 @@
   "login": {
     "role": "administrator",
     "statusCode": 200,
-    "username": "qwae",
-    "password": "qwe"
+    "username": "123",
+    "password": "123"
   },
   "user": {
     "username": "admin",
